@@ -1,0 +1,21 @@
+Package: fileutils
+Title: Functions to handle and maniputate filenames
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Kees",
+           family = "van Immerzeel",
+           role = c("aut", "cre"),
+           email = "c.h.van.immerzeel@gmail.com",
+           comment = c(ORCID = "https://orcid.org/0000-0003-0926-3248"))
+Description: Collection of functions to handle and maniputate filenames. 
+License: Artistic-2.0
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    magrittr (>= 1.5),
+    tools (>= 3.6.1),
+    utils
+RoxygenNote: 7.1.2
+Roxygen: list(markdown = TRUE)
+Suggests: 
+    testthat
