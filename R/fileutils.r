@@ -1,4 +1,4 @@
-#' fnamer: Collection of functions to handle and maniputate filenames.
+#' fileutils: Collection of functions to handle and maniputate filenames.
 #'
 #' This package does not export any objects.
 #'
@@ -10,7 +10,7 @@
 #' * \code{\link{pks_dependencies}}
 #'
 #' @docType package
-#' @name fnamer
+#' @name fileutils
 #'
 #' @importFrom tools file_ext package_dependencies
 #' @importFrom magrittr "%>%" "%<>%"
