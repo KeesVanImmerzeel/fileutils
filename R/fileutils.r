@@ -8,6 +8,7 @@
 #' * \code{\link{change_filename_extension}}
 #' * \code{\link{bare_filename}}
 #' * \code{\link{pks_dependencies}}
+#' * \code{\link{get_relative_filename}}
 #'
 #' @docType package
 #' @name fileutils
@@ -15,4 +16,5 @@
 #' @importFrom tools file_ext package_dependencies
 #' @importFrom magrittr "%>%" "%<>%"
 #' @importFrom utils "contrib.url" "available.packages"
+#' @importFrom R.utils "getRelativePath"
 NULL

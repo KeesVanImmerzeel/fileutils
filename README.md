@@ -19,6 +19,7 @@ Then load the package with:
 - `change_filename_extension()`: Change filename extension.
 - `bare_filename()`: Return the bare filename (no path, no extension).
 - `pks_dependencies`: Return names of all dependent packages.
+- `get_relative_filename`: Construct the pathname/filename with new basepath.
 
 ## Get help
 
