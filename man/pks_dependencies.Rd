@@ -7,10 +7,10 @@
 pks_dependencies(pks)
 }
 \arguments{
-\item{pks}{Names of packages (chr)}
+\item{pks}{Names of packages (character)}
 }
 \value{
-Names of all packages that depend on packages specified (chr)
+Names of all packages that depend on packages specified (character)
 }
 \description{
 Return names of all dependent packages

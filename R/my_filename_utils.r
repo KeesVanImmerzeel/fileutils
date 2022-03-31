@@ -88,8 +88,8 @@ bare_filename <- function( a_filename ) {
 
 #' Return names of all dependent packages
 #'
-#' @param pks Names of packages (chr)
-#' @return Names of all packages that depend on packages specified (chr)
+#' @param pks Names of packages (character)
+#' @return Names of all packages that depend on packages specified (character)
 #' @examples
 #' pks_dependencies(c("magrittr","dplyr"))
 #' @export
@@ -104,3 +104,46 @@ pks_dependencies <- function(pks) {
       unlist() %>%
       unique()
 }
+
+# ----------------------------------------------------------------------------
+
+#' Construct the pathname/filename with new basepath.
+#'
+#' @inheritParams get_filename_extension
+#' @inheritParams change_filename_extension
+#' @param relativeTo Reference pathname (character)
+#' @param new_basepath new base path (character)
+#' @param create_dir Create folder (boolean)
+#' @examples
+#' a_filename <- "c:/input/input_sub/test.txt"
+#' relativeTo <- "c:/input"
+#' new_basepath <- "d:/results"
+#' new_ext <- ".tif"
+#' create_dir <- FALSE
+#' get_relative_filename( a_filename, relativeTo, new_basepath, new_ext, create_dir )
+#' @export
+get_relative_filename <-
+   function(a_filename,
+            relativeTo,
+            new_basepath,
+            new_ext = NULL,
+            create_dir = FALSE) {
+      . = NULL
+      pth <- new_basepath
+      reldir <-
+         a_filename %>% dirname() %>% R.utils::getRelativePath(relativeTo)
+      if (reldir != ".") {
+         pth <-
+            file.path(pth, reldir)
+      }
+      if ((create_dir) & (!dir.exists(pth))) {
+         dir.create(pth)
+      }
+      a_filename %<>% basename() %>% file.path(pth, .)
+      if (!is.null(new_ext)) {
+         a_filename %<>% fileutils::change_filename_extension(new_ext)
+      }
+      return(a_filename)
+   }
+
+

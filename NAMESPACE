@@ -3,6 +3,7 @@
 export(bare_filename)
 export(change_filename_extension)
 export(get_filename_extension)
+export(get_relative_filename)
 export(pks_dependencies)
 importFrom(magrittr,"%<>%")
 importFrom(magrittr,"%>%")
