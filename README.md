@@ -1,6 +1,7 @@
 # fileutils
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/KeesVanImmerzeel/fileutils/workflows/R-CMD-check/badge.svg)](https://github.com/KeesVanImmerzeel/fileutils/actions)
 <!-- badges: end -->
 
 Collection of functions to handle and manipulate filenames.
