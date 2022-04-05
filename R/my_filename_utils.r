@@ -137,7 +137,7 @@ get_relative_filename <-
             file.path(pth, reldir)
       }
       if ((create_dir) & (!dir.exists(pth))) {
-         dir.create(pth)
+         dir.create(pth, recursive = TRUE)
       }
       a_filename %<>% basename() %>% file.path(pth, .)
       if (!is.null(new_ext)) {
@@ -146,4 +146,15 @@ get_relative_filename <-
       return(a_filename)
    }
 
+# ----------------------------------------------------------------------------
+
+#' Determine a script’s filename from within the script itself to create a new filename with a specified extension.
+#'
+#' @inheritParams change_filename_extension
+#' @export
+get_inp_filename <- function(new_ext = ".inp") {
+      scriptName::current_filename() %>%
+      fileutils::bare_filename() %>%
+      fileutils::change_filename_extension( new_ext )
+}
 

@@ -15,5 +15,6 @@ This package exports the following functions:
 \item \code{\link{bare_filename}}
 \item \code{\link{pks_dependencies}}
 \item \code{\link{get_relative_filename}}
+\item \code{\link{get_inp_filename}}
 }
 }

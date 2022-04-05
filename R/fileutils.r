@@ -9,6 +9,7 @@
 #' * \code{\link{bare_filename}}
 #' * \code{\link{pks_dependencies}}
 #' * \code{\link{get_relative_filename}}
+#' * \code{\link{get_inp_filename}}
 #'
 #' @docType package
 #' @name fileutils
@@ -17,4 +18,5 @@
 #' @importFrom magrittr "%>%" "%<>%"
 #' @importFrom utils "contrib.url" "available.packages"
 #' @importFrom R.utils "getRelativePath"
+#' @importFrom scriptName "current_filename"
 NULL

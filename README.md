@@ -20,6 +20,7 @@ Then load the package with:
 - `bare_filename()`: Return the bare filename (no path, no extension).
 - `pks_dependencies`: Return names of all dependent packages.
 - `get_relative_filename`: Construct the pathname/filename with new basepath.
+- `get_inp_filename`: Determine a script’s filename from within the script itself to create a new filename with a specified extension.
 
 ## Get help
 
