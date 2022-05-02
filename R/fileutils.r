@@ -10,6 +10,7 @@
 #' * \code{\link{pks_dependencies}}
 #' * \code{\link{get_relative_filename}}
 #' * \code{\link{get_inp_filename}}
+#' * \code{\link{filter_idfnames}}
 #'
 #' @docType package
 #' @name fileutils
@@ -19,4 +20,6 @@
 #' @importFrom utils "contrib.url" "available.packages"
 #' @importFrom R.utils "getRelativePath"
 #' @importFrom scriptName "current_filename"
+#' @importFrom lubridate "ymd"
+#' @importFrom lubridate "month"
 NULL
