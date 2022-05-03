@@ -157,26 +157,3 @@ get_inp_filename <- function(new_ext = ".inp") {
       fileutils::bare_filename() %>%
       fileutils::change_filename_extension( new_ext )
 }
-
-# ----------------------------------------------------------------------------
-
-#' Filter filenames of idf- files with a date included, like 'HEAD_20080402_l1.idf'
-#' @param idfnames idf-filename (character vector)
-#' @param fltr filter to be applied, where (character)
-#' @return Selected names of idf-files.
-#' @examples
-#' idfnames <- c("HEAD_20080401_l1.idf","HEAD_20080501_l1")
-#' fltr <- "month(dates)==4"
-#' filter_idfnames(idfnames, fltr)
-#' @export
-filter_idfnames <- function(idfnames, fltr = NULL) {
-   if (!is.null(fltr)) {
-      dates <-
-         idfnames %>% fileutils::bare_filename() %>% strsplit("_") %>% sapply(function(x) {
-            x[2]
-         }) %>% lubridate::ymd()
-      sel <- fltr %>%  str2lang() %>% eval()
-      return(idfnames[sel])
-   } else
-      return(idfnames)
-}
