@@ -12,12 +12,14 @@ License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
 Imports: 
+    dplyr,
+    lubridate,
     magrittr (>= 1.5),
     R.utils,
     scriptName,
     tools (>= 3.6.1),
     utils
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
 Suggests: 
     testthat

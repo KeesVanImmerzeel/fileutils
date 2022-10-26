@@ -10,6 +10,7 @@
 #' * \code{\link{pks_dependencies}}
 #' * \code{\link{get_relative_filename}}
 #' * \code{\link{get_inp_filename}}
+#' * \code{\link{dates_dataframe}}
 
 #'
 #' @docType package
@@ -20,4 +21,6 @@
 #' @importFrom utils "contrib.url" "available.packages"
 #' @importFrom R.utils "getRelativePath"
 #' @importFrom scriptName "current_filename"
+#' @importFrom dplyr "mutate"
+#' @importFrom lubridate "year"
 NULL

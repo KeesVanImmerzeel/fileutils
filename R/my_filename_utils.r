@@ -157,3 +157,49 @@ get_inp_filename <- function(new_ext = ".inp") {
       fileutils::bare_filename() %>%
       fileutils::change_filename_extension( new_ext )
 }
+
+
+# ----------------------------------------------------------------------------
+
+#' Create a data.frame with fields derived from the dates specified.
+#'
+#' The newly created fiels can be used in selections
+#'
+#' @param dates Dates (character)
+#' @return data.frame with date related fields (date, year, month, day, hydro_year, season, hydr_season, apr1okt1 )
+#' @examples
+#' dates <- as.Date( c("2009-01-02", "2009-01-03", "2009-01-04", "2009-01-05", "2009-01-06") )
+#' dates_dataframe( dates )
+#' @export
+dates_dataframe <- function(dates) {
+      month <- NULL
+      day <- NULL
+      df <-
+            data.frame(
+                  date = dates,
+                  year = lubridate::year(dates),
+                  month = lubridate::month(dates),
+                  day = lubridate::day(dates)
+            )
+      df %<>% dplyr::mutate(hydro_year = ifelse(month %in% 10:12, year + 1, year))
+      df %<>% dplyr::mutate(season = ifelse(
+            month %in% 9:11,
+            "herfst",
+            ifelse(
+                  month %in% c(12, 1, 2),
+                  "Winter",
+                  ifelse(month %in% 3:5, "voorjaar",
+                         "zomer")
+            )
+      ))
+      df %<>% dplyr::mutate(hydr_season = ifelse(month %in% c(10:12, 1:3),
+                                          "hydr_wintr",
+                                          "hydr_summr"))
+      df %<>% dplyr::mutate(apr1okt1 = ifelse(
+            month == 4 & day == 1,
+            "apr_1",
+            ifelse(month == 10 & day == 1,
+                   "okt_1", "other")
+      ))
+      return(df)
+}
