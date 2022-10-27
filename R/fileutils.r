@@ -12,6 +12,7 @@
 #' * \code{\link{get_inp_filename}}
 #' * \code{\link{create_dates_dataframe}}
 #' * \code{\link{repair_exprstr_from_batch}}
+#' * \code{\link{splitstr_in_label_and_expression}}
 
 #'
 #' @docType package

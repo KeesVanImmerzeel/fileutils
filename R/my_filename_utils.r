@@ -227,3 +227,21 @@ repair_exprstr_from_batch <- function(x) {
             gsub("\"=\"", "!=", .)
   return(x)
 }
+
+# ----------------------------------------------------------------------------
+
+#' Split string in label and expression where '=' is the separator character.
+#'
+#' @param x String with label and expression (character)
+#' @return list with two items: 'label' (character) and 'exprstr' (character)
+#' @examples
+#' x <- "sum_by_season= group_by(season) %>% summarise_all( .funs = c(gemiddelde='mean', sd='sd'))"
+#' splitstr_in_label_and_expression(x)
+#' @export
+splitstr_in_label_and_expression <- function(x) {
+      spl <- regexpr("=", x)
+      s <- substring(x, c(1, spl + 1), c(spl - 1, nchar(x)))
+      return(list(label = trimws(s[1]), exprstr = trimws(s[2])))
+}
+
+

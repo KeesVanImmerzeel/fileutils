@@ -23,6 +23,7 @@ Then load the package with:
 - `get_inp_filename`: Determine a script’s filename from within the script itself to create a new filename with a specified extension.
 - `create_dates_dataframe`: Create a data.frame with fields derived from the dates specified.
 - `repair_exprstr_from_batch`: Repair an expression string that is imported from a DOS-batch file as an environment variable.
+- `splitstr_in_label_and_expression`: Split string in label and expression where '=' is the separator character.
 
 ## Get help
 
