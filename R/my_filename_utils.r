@@ -169,9 +169,9 @@ get_inp_filename <- function(new_ext = ".inp") {
 #' @return data.frame with date related fields (date, year, month, day, hydro_year, season, hydr_season, apr1okt1 )
 #' @examples
 #' dates <- as.Date( c("2009-01-02", "2009-01-03", "2009-01-04", "2009-01-05", "2009-01-06") )
-#' dates_dataframe( dates )
+#' create_dates_dataframe( dates )
 #' @export
-dates_dataframe <- function(dates) {
+create_dates_dataframe <- function(dates) {
       month <- NULL
       day <- NULL
       df <-
@@ -202,4 +202,28 @@ dates_dataframe <- function(dates) {
                    "okt_1", "other")
       ))
       return(df)
+}
+
+# ----------------------------------------------------------------------------
+
+#' Repair an expression string that is imported from a DOS-batch file as an environment variable.
+#'
+#' Remark: Double spaces are interpreted as %>%
+#'
+#' @param x Imported string from a DOS-batch file (character)
+#' @return Repaired expression string (character)
+#' @examples
+#' x <- "filter( apr1okt1 \"=\" \"other\")  group_by(apr1okt1)  summarise_all(.funs=c(gem='mean'))"
+#' repair_exprstr_from_batch(x)
+#' @export
+repair_exprstr_from_batch <- function(x) {
+  . <- NULL
+  x %<>% trimws() %>%
+            gsub("  ", " %>% ", .) %>%
+            gsub("\">\"", ">", .) %>%
+            gsub("\"<\"", "<", .) %>%
+            gsub("\"<=\"", "<=", .) %>%
+            gsub("\">=\"", ">=", .) %>%
+            gsub("\"=\"", "!=", .)
+  return(x)
 }

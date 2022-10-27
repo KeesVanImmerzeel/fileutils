@@ -21,7 +21,8 @@ Then load the package with:
 - `pks_dependencies`: Return names of all dependent packages.
 - `get_relative_filename`: Construct the pathname/filename with new basepath.
 - `get_inp_filename`: Determine a script’s filename from within the script itself to create a new filename with a specified extension.
-- `dates_dataframe`: Create a data.frame with fields derived from the dates specified.
+- `create_dates_dataframe`: Create a data.frame with fields derived from the dates specified.
+- `repair_exprstr_from_batch`: Repair an expression string that is imported from a DOS-batch file as an environment variable.
 
 ## Get help
 
