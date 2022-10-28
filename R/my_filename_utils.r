@@ -206,42 +206,61 @@ create_dates_dataframe <- function(dates) {
 
 # ----------------------------------------------------------------------------
 
-#' Repair an expression string that is imported from a DOS-batch file as an environment variable.
+
+#' Return the label and expression part of a string created in DOS-batch file as an environment variable.
 #'
-#' Remark: Double spaces are interpreted as %>%
+#' Background: All DOS versions interpret certain characters before executing a command.
+#' Some well know examples are the percent sign ( % ), and the redirection symbols ( < | > ).
+#' These characters have to be escaped or surrounded by double quotes in order to pass them to an R-script as (part of) an system environment variable.
 #'
-#' @param x Imported string from a DOS-batch file (character)
-#' @return Repaired expression string (character)
+#' This function splits the string defined in a batch file imported with 'Sys.getenv() in two parts and returns a named list with two character strings: 'label' and 'exprstr'.
+#' The result 'exprstr' can be used in a dplyr 'filter' function.
+#' @param x String defined in a batch file and imported with 'Sys.getenv() (character)
+#' @return list with two character strings: 'label' and 'exprstr'. 'Label' characterises the dplyr 'summarise' result.
 #' @examples
-#' x <- "filter( apr1okt1 \"=\" \"other\")  group_by(apr1okt1)  summarise_all(.funs=c(gem='mean'))"
-#' repair_exprstr_from_batch(x)
+#' x <- "sum_apr1okt1=group_by(apr1okt1)  summarise_all(.funs=c(gem='mean'))"
+#  rSIF_get_label_and_exprstr(x)
 #' @export
-repair_exprstr_from_batch <- function(x) {
-  . <- NULL
-  x %<>% trimws() %>%
-            gsub("  ", " %>% ", .) %>%
-            gsub("\">\"", ">", .) %>%
-            gsub("\"<\"", "<", .) %>%
-            gsub("\"<=\"", "<=", .) %>%
-            gsub("\">=\"", ">=", .) %>%
-            gsub("\"=\"", "!=", .)
-  return(x)
+rSIF_get_label_and_exprstr <- function(x) {
+      # ----------------------------------------------------------------------------
+
+      # Repair an expression string that is imported from a DOS-batch file as an environment variable.
+      #
+      # Remark: Double spaces are interpreted as %>%
+      #
+      # @param x Imported string from a DOS-batch file (character)
+      # @return Repaired expression string (character)
+      # @examples
+      # x <- "filter( apr1okt1 \"=\" \"other\")  group_by(apr1okt1)  summarise_all(.funs=c(gem='mean'))"
+      # repair_exprstr_from_batch(x)
+      repair_exprstr_from_batch <- function(x) {
+            . <- NULL
+            x %<>% trimws() %>%
+                  gsub("  ", " %>% ", .) %>%
+                  gsub("\">\"", ">", .) %>%
+                  gsub("\"<\"", "<", .) %>%
+                  gsub("\"<=\"", "<=", .) %>%
+                  gsub("\">=\"", ">=", .) %>%
+                  gsub("\"=\"", "!=", .)
+            return(x)
+      }
+
+      # ----------------------------------------------------------------------------
+
+      # Split string in label and expression where '=' is the separator character.
+      #
+      # @param x String with label and expression (character)
+      # @return list with two items: 'label' (character) and 'exprstr' (character)
+      # @examples
+      # x <- "sum_by_season= group_by(season) %>% summarise_all( .funs = c(gemiddelde='mean', sd='sd'))"
+      # splitstr_in_label_and_expression(x)
+      splitstr_in_label_and_expression <- function(x) {
+            spl <- regexpr("=", x)
+            s <- substring(x, c(1, spl + 1), c(spl - 1, nchar(x)))
+            return(list(label = trimws(s[1]), exprstr = trimws(s[2])))
+      }
+
+      x %<>% repair_exprstr_from_batch()
+      s <- x %>% splitstr_in_label_and_expression()
+      return(s)
 }
-
-# ----------------------------------------------------------------------------
-
-#' Split string in label and expression where '=' is the separator character.
-#'
-#' @param x String with label and expression (character)
-#' @return list with two items: 'label' (character) and 'exprstr' (character)
-#' @examples
-#' x <- "sum_by_season= group_by(season) %>% summarise_all( .funs = c(gemiddelde='mean', sd='sd'))"
-#' splitstr_in_label_and_expression(x)
-#' @export
-splitstr_in_label_and_expression <- function(x) {
-      spl <- regexpr("=", x)
-      s <- substring(x, c(1, spl + 1), c(spl - 1, nchar(x)))
-      return(list(label = trimws(s[1]), exprstr = trimws(s[2])))
-}
-
-

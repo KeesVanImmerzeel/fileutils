@@ -17,7 +17,6 @@ This package exports the following functions:
 \item \code{\link{get_relative_filename}}
 \item \code{\link{get_inp_filename}}
 \item \code{\link{create_dates_dataframe}}
-\item \code{\link{repair_exprstr_from_batch}}
-\item \code{\link{splitstr_in_label_and_expression}}
+\item \code{\link{rSIF_get_label_and_exprstr}}
 }
 }
