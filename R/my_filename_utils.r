@@ -106,6 +106,29 @@ pks_dependencies <- function(pks) {
 }
 
 # ----------------------------------------------------------------------------
+.get_relative_filename <-
+      function(a_filename,
+               relativeTo,
+               new_basepath,
+               new_ext = NULL,
+               create_dir = FALSE) {
+            . = NULL
+            pth <- new_basepath
+            reldir <-
+                  a_filename %>% dirname() %>% R.utils::getRelativePath(relativeTo)
+            if (reldir != ".") {
+                  pth <-
+                        file.path(pth, reldir)
+            }
+            if ((create_dir) & (!dir.exists(pth))) {
+                  dir.create(pth, recursive = TRUE)
+            }
+            a_filename %<>% basename() %>% file.path(pth, .)
+            if (!is.null(new_ext)) {
+                  a_filename %<>% fileutils::change_filename_extension(new_ext)
+            }
+            return(a_filename)
+      }
 
 #' Construct the pathname/filename with new basepath.
 #'
@@ -122,29 +145,7 @@ pks_dependencies <- function(pks) {
 #' create_dir <- FALSE
 #' get_relative_filename( a_filename, relativeTo, new_basepath, new_ext, create_dir )
 #' @export
-get_relative_filename <-
-   function(a_filename,
-            relativeTo,
-            new_basepath,
-            new_ext = NULL,
-            create_dir = FALSE) {
-      . = NULL
-      pth <- new_basepath
-      reldir <-
-         a_filename %>% dirname() %>% R.utils::getRelativePath(relativeTo)
-      if (reldir != ".") {
-         pth <-
-            file.path(pth, reldir)
-      }
-      if ((create_dir) & (!dir.exists(pth))) {
-         dir.create(pth, recursive = TRUE)
-      }
-      a_filename %<>% basename() %>% file.path(pth, .)
-      if (!is.null(new_ext)) {
-         a_filename %<>% fileutils::change_filename_extension(new_ext)
-      }
-      return(a_filename)
-   }
+get_relative_filename <- Vectorize(.get_relative_filename)
 
 # ----------------------------------------------------------------------------
 
