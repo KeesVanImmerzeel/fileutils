@@ -145,7 +145,7 @@ pks_dependencies <- function(pks) {
 #' create_dir <- FALSE
 #' get_relative_filename( a_filename, relativeTo, new_basepath, new_ext, create_dir )
 #' @export
-get_relative_filename <- Vectorize(.get_relative_filename)
+get_relative_filename <- Vectorize(.get_relative_filename, vectorize.args="a_filename", USE.NAMES=FALSE)
 
 # ----------------------------------------------------------------------------
 
