@@ -23,4 +23,5 @@ The result 'exprstr' can be used in a dplyr 'filter' function.
 }
 \examples{
 x <- "sum_apr1okt1=group_by(apr1okt1)  summarise_all(.funs=c(gem='mean'))"
+rSIF_get_label_and_exprstr(x)
 }
