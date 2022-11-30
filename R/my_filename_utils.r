@@ -215,9 +215,9 @@ create_dates_dataframe <- function(dates) {
 #' @return Repaired expression string (character)
 #' @examples
 #' x <- "filter( apr1okt1 \"=\" \"other\")  group_by(apr1okt1)  summarise_all(.funs=c(gem='mean'))"
-#' repair_exprstr_from_batch(x)
+#' rSIF_repair_exprstr_from_batch(x)
 #' @export
-repair_exprstr_from_batch <- function(x) {
+rSIF_repair_exprstr_from_batch <- function(x) {
       . <- NULL
       x %<>% trimws() %>%
             gsub("  ", " %>% ", .) %>%
@@ -226,7 +226,8 @@ repair_exprstr_from_batch <- function(x) {
             gsub("\"<=\"", "<=", .) %>%
             gsub("\">=\"", ">=", .) %>%
             gsub("\"=\"", "!=", .) %>%
-            gsub("\"&\"", "&", .)
+            gsub("\"&\"", "&", .) %>%
+            gsub("\"==\"", "==", .)
       return(x)
 }
 
@@ -262,7 +263,7 @@ rSIF_get_label_and_exprstr <- function(x) {
             return(list(label = trimws(s[1]), exprstr = trimws(s[2])))
       }
 
-      x %<>% repair_exprstr_from_batch()
+      x %<>% fileutils::rSIF_repair_exprstr_from_batch()
       s <- x %>% splitstr_in_label_and_expression()
       return(s)
 }

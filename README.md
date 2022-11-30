@@ -22,7 +22,7 @@ Then load the package with:
 - `get_relative_filename`: Construct the pathname/filename with new basepath.
 - `get_inp_filename`: Determine a script’s filename from within the script itself to create a new filename with a specified extension.
 - `create_dates_dataframe`: Create a data.frame with fields derived from the dates specified.
-- `repair_exprstr_from_batch`: Repair an expression string that is imported from a DOS-batch file as an environment variable. 
+- `rSIF_repair_exprstr_from_batch`: Repair an expression string that is imported from a DOS-batch file as an environment variable. 
 - `rSIF_get_label_and_exprstr`: Return the label and expression part of a string created in DOS-batch file as an environment variable.
 
 ## Get help
