@@ -227,7 +227,8 @@ rSIF_repair_exprstr_from_batch <- function(x) {
             gsub("\">=\"", ">=", .) %>%
             gsub("\"=\"", "!=", .) %>%
             gsub("\"&\"", "&", .) %>%
-            gsub("\"==\"", "==", .)
+            gsub("\"==\"", "==", .) %>%
+            gsub("\"\"", "\"", .)
       return(x)
 }
 
