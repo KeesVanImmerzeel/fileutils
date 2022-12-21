@@ -202,6 +202,12 @@ create_dates_dataframe <- function(dates) {
             ifelse(month == 10 & day == 1,
                    "okt_1", "other")
       ))
+      df %<>% dplyr::mutate(mrt28sep28 = ifelse(
+            month == 3 & day == 28,
+            "mrt_28",
+            ifelse(month == 9 & day == 28,
+                   "sep_28", "other")
+      ))
       return(df)
 }
 
@@ -227,8 +233,7 @@ rSIF_repair_exprstr_from_batch <- function(x) {
             gsub("\">=\"", ">=", .) %>%
             gsub("\"=\"", "!=", .) %>%
             gsub("\"&\"", "&", .) %>%
-            gsub("\"==\"", "==", .) %>%
-            gsub("\"\"", "\"", .)
+            gsub("\"==\"", "==", .)
       return(x)
 }
 
